@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">    
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">    
+
+    <link rel="stylesheet" href="/css/angellist.css">   
+    
+    <script type="text/javascript" src="/js/d3.v3.js"></script>
+    <script>window.jQuery || document.write('<script src="http://code.jquery.com/jquery-1.8.2.min.js"><\/script>')</script>
+
+  </head>
+
+  <body>
+    <div id="container">
+   	<h1>VISUAL ANALYTICS - BUBBLE CHART</h1>
+      <div id="intro">
+        <h3>Angel List - Funding start-ups in technology and healthcare</h3> 
+
+        <p>
+          Explore this data visualization to discover the companies being funded by accredited angel investors.
+          <br>
+          <ul>
+            <li>
+              Switch between the different tabs to filter data by different categories. 
+            </li>
+            <li>
+              Mouse-over the bubbles to learn more about each company.
+            </li>
+            
+          </ul>
+        </p>
+        <br>
+      </div> 
+      <div id="main" role="main">
+        <div id="view_selection" class="btn-group">
+          <a href="#" id="all" class="btn active">All Companies</a>          
+          <a href="#" id="market" class="btn">By Market</a>
+          <a href="#" id="funding" class="btn">By Funding</a>
+          <a href="#" id="stage" class="btn">By Stage</a>
+          <a href="#" id="employees" class="btn">By Number of Employees</a>
+        </div>
+        
+        <div id="vis">
+        </div>
+      </div>
+    </div> <!-- end of #container -->
+
+    <script type="./text/javascript">
+      
+      d3.csv("./data/Bubble.csv", function(data) {
+        custom_bubble_chart.init(data);
+        custom_bubble_chart.toggle_view('all');
+      });
+     
+      $(document).ready(function() {
+
+        $('#view_selection a').click(function() {
+
+          var view_type = $(this).attr('id');
+
+          $('#view_selection a').removeClass('active');
+
+          $(this).toggleClass('active');
+
+          custom_bubble_chart.toggle_view(view_type);
+
+          return false;
+
+        });
+
+      }); 
+
+      
+
+    </script>
+    
+	<script src="./js/Bubble.js"></script>
+  </body>
+</html>
